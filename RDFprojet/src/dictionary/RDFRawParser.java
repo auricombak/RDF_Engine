@@ -1,12 +1,15 @@
 package dictionary;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -23,7 +26,7 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 
 public final class RDFRawParser {
 	
-	private static 	TreeMap < String, Integer > dico = new TreeMap<>();
+	private static 	TreeMap <String, Integer > dico = new TreeMap<>();
 	private static HashMap<Integer, String> base = new HashMap<>();
 	
 	//On recherchera toujours le sujet donc il est plus performant de le garder en fin pour une meilleure performance
@@ -44,13 +47,13 @@ public final class RDFRawParser {
 			
 			subjects.add(st.getSubject().toString());
 			predicates.add(st.getPredicate().toString());
-			objects.add(st.getObject().toString());						
+			objects.add(st.getObject().toString().replaceAll("\"", ""));						
 			nbTriple++;
 		}
 
 	};
 
-	public static void main(String args[]) throws FileNotFoundException {
+	public static void main(String args[]) throws IOException {
 
 		
 		Reader reader = new FileReader(
@@ -69,6 +72,18 @@ public final class RDFRawParser {
 		init(list);
 
 		
+		/*
+		for(int x=0; x<200; x++) {
+			System.out.println("------");
+			System.out.println("Predicate : ["+list.predicates.get(x).toString() + "]");
+			System.out.println("Object : ["+list.objects.get(x).toString() + "]");
+			System.out.println("Subject : ["+list.subjects.get(x).toString()+ "]");
+
+		} */
+		
+		//displayDico();
+		
+		System.out.println("Result : " + query("http://db.uwaterloo.ca/~galuc/wsdbm/userId", "9279708" ).toString());
 
 	}
 	
@@ -76,10 +91,11 @@ public final class RDFRawParser {
 		
 		TreeSet<String> listEachSPO = new TreeSet<>();
 		
+		
+		// Populate TreeSet who sort and avoid doublons
 		int i=0;
 		while(i<list.nbTriple){
 			
-			//On peuple un set ( donc sans doublons ) contenant chaque URI
 			listEachSPO.add(list.subjects.get(i));
 			listEachSPO.add(list.predicates.get(i));
 			listEachSPO.add(list.objects.get(i));			
@@ -87,17 +103,18 @@ public final class RDFRawParser {
 			i++;
 		}
 		
+		// Populate dico & base
 		int cmp=0;
 		for(String value : listEachSPO){
-			dico.put(value, i);
-			base.put(i, value);
+			dico.put(value, cmp);
+			base.put(cmp, value);
 			cmp++;
 			
-			System.out.println("<"+value+" , "+cmp+">");
+			//System.out.println("<"+value+" , "+cmp+">");
 		}
 		
 		
-		
+		// Create Index ops and pos
 		int j=0;
 		while(j<list.nbTriple){
 			
@@ -111,17 +128,50 @@ public final class RDFRawParser {
 			hashOps.get(p).add(s);
 			
 			pos.putIfAbsent(p, new HashMap<Integer, ArrayList<Integer> >() ) ;
-			HashMap<Integer, ArrayList<Integer>> hashPos = ops.get(p); 
-			hashOps.putIfAbsent(o, new ArrayList<Integer>());
-			hashOps.get(o).add(s);
+			HashMap<Integer, ArrayList<Integer>> hashPos = pos.get(p); 
+			hashPos.putIfAbsent(o, new ArrayList<Integer>());
+			hashPos.get(o).add(s);
 			
 			j++;
 		}
 		
-		
-		
-		System.out.println(ops.toString());
+		//System.out.println(pos.size());
+		//System.out.println(ops.size());
+		//System.out.println(pos.size());
+	
+		//System.out.println(ops.toString());
 
 	}
 
+	public static ArrayList<String> query( String predicate, String object) {
+		
+		int Ipredicate = dico.get(predicate);
+		int Iobject = dico.get(object);
+		
+		ArrayList<Integer> Isubject = pos.get(Ipredicate).get(Iobject);
+		ArrayList<String> subject = new ArrayList<>();
+		
+		
+		for(Integer s: Isubject) {
+			subject.add(base.get(s));
+		}
+		
+		
+		return subject;
+		
+	}
+	
+	public static void displayDico() throws IOException {
+		String aggFileName = "agg-"+String.valueOf("06.txt");
+		FileWriter fstream = new FileWriter(aggFileName);
+		BufferedWriter out = new BufferedWriter(fstream);
+		
+		for (Map.Entry<String, Integer> entree : dico.entrySet()) {
+			System.out.println("Clé : "+entree.getKey()+" Valeur : "+entree.getValue());
+		    out.write("Key "+entree.getKey() + "\t" + "Value" + entree.getValue() + "\n");
+		    System.out.println("Done");
+		    out.flush();
+
+		}
+	}
 }
