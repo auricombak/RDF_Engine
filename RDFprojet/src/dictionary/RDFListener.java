@@ -1,8 +1,14 @@
 package dictionary;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 
 import org.openrdf.model.Statement;
+import org.openrdf.rio.RDFFormat;
+import org.openrdf.rio.Rio;
 import org.openrdf.rio.helpers.RDFHandlerBase;
 
 public class RDFListener extends RDFHandlerBase {
@@ -14,22 +20,45 @@ public class RDFListener extends RDFHandlerBase {
 	
 	@Override
 	public void handleStatement(Statement st) {
-
-		
 		subjects.add(st.getSubject().toString());
 		predicates.add(st.getPredicate().toString());
 		objects.add(st.getObject().toString().replaceAll("\"", ""));						
 		nbTriple++;
 	}
-	
-	public void toString(int i) {
-		for(int x=0; x<i; x++) {
-			System.out.println("------");
-			System.out.println("Predicate : ["+predicates.get(x).toString() + "]");
-			System.out.println("Object : ["+objects.get(x).toString() + "]");
-			System.out.println("Subject : ["+subjects.get(x).toString()+ "]");
 
-		}
+	public ArrayList<String> getSubjects() {
+		return subjects;
 	}
+
+	public void setSubjects(ArrayList<String> subjects) {
+		this.subjects = subjects;
+	}
+
+	public ArrayList<String> getPredicates() {
+		return predicates;
+	}
+
+	public void setPredicates(ArrayList<String> predicates) {
+		this.predicates = predicates;
+	}
+
+
+	public ArrayList<String> getObjects() {
+		return objects;
+	}
+
+	public void setObjects(ArrayList<String> objects) {
+		this.objects = objects;
+	}
+
+	public static Integer getNbTriple() {
+		return nbTriple;
+	}
+
+	public static void setNbTriple(Integer nbTriple) {
+		RDFListener.nbTriple = nbTriple;
+	}
+	
+
 
 }

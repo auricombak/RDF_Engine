@@ -8,8 +8,9 @@ public class Index {
 	private HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> pos =  new HashMap<>();
 	private HashMap<Integer, HashMap<Integer, ArrayList<Integer>>> ops =  new HashMap<>();
 	
+	// Create Index ops and pos
 	public Index(Dictionary dico, RDFListener list) {
-		// Create Index ops and pos
+
 				int i=0;
 				while(i<list.nbTriple){
 					

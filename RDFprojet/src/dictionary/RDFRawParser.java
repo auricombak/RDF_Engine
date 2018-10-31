@@ -26,49 +26,44 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 
 public final class RDFRawParser {
 	
-	public static void main(String args[]) throws IOException {
+	RDFListener list;
 
+	public void parse(String path) throws FileNotFoundException {
 		
+		//Reader reader = new FileReader(path);
 		Reader reader = new FileReader(
 				"../RDFprojet/100K.rdfxml");
 
 		org.openrdf.rio.RDFParser rdfParser = Rio
 				.createParser(RDFFormat.RDFXML);
 		
-		RDFListener list = new RDFListener();
+		list = new RDFListener();
+		
 		rdfParser.setRDFHandler(list);
 		
 		try {rdfParser.parse(reader, "");} catch (Exception e) {}
 		
 		try {reader.close();} catch (IOException e) {}
-		
-		Dictionary dico = new Dictionary(list);
-		Index index = new Index(dico, list);
-		
-		// dico.writeDico();
-		// dico.writeBase();
-		
-		System.out.println("Result : " + query(index, dico , "http://db.uwaterloo.ca/~galuc/wsdbm/userId", "9279708" ).toString());
-
 	}
 	
+	public void toString(int i) {
+		for(int x=0; x<i; x++) {
+			System.out.println("------");
+			System.out.println("Predicate : ["+list.getPredicates().get(x).toString() + "]");
+			System.out.println("Object : ["+list.getObjects().get(x).toString() + "]");
+			System.out.println("Subject : ["+list.getSubjects().get(x).toString()+ "]");
 
-
-	public static ArrayList<String> query(Index index, Dictionary dico, String predicate, String object) {
-		
-		int Ipredicate = dico.getDico().get(predicate);
-		int Iobject = dico.getDico().get(object);
-		
-		ArrayList<Integer> Isubject = index.getPos().get(Ipredicate).get(Iobject);
-		ArrayList<String> subject = new ArrayList<>();
-		
-		
-		for(Integer s: Isubject) {
-			subject.add(dico.getBase().get(s));
 		}
-		
-		
-		return subject;
-		
 	}
+
+	public RDFListener getList() {
+		return list;
+	}
+
+	public void setList(RDFListener list) {
+		this.list = list;
+	}
+	
+	
+
 }
