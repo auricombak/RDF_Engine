@@ -1,24 +1,26 @@
 package dictionary;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		RDFRawParser parcer = new RDFRawParser();
 		parcer.parse("../RDFprojet/100K.rdfxml");
 		
 		Dictionary dico = new Dictionary(parcer.getList());
 		Index index = new Index(dico, parcer.getList());
-		QueryFactory query = new QueryFactory();
-		Query q = query.create("ca");
-		System.out.println(q.toString());
+		QueryFactory factory = new QueryFactory();
+		// Query q = query.create("ca");
+		// System.out.println(q.toString());
+		factory.createMultipleQuery("../RDFprojet/query.queryset");
 		// dico.writeDico();
 		// dico.writeBase();
-		//query.executeListQuery("../RDFprojet/")
-		//System.out.println("Result : " + query(index, dico , "http://db.uwaterloo.ca/~galuc/wsdbm/userId", "9279708" ).toString());
+		// query.executeListQuery("../RDFprojet/")
+		// System.out.println("Result : " + query(index, dico , "http://db.uwaterloo.ca/~galuc/wsdbm/userId", "9279708" ).toString());
 		
 	}
 	

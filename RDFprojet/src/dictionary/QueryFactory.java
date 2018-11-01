@@ -3,6 +3,7 @@ package dictionary;
 import java.awt.List;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,14 +15,14 @@ import java.util.regex.Pattern;
 
 public class QueryFactory {
 		
-	public Query create(String q) {		
+	public Query createSimpleQuery(String q) {		
 		
 		Query query = new Query();
 		
 		String qu = "SELECT ?v0 WHERE { ?v0 <http://purl.org/dc/terms/Location> <http://db.uwaterloo.ca/~galuc/wsdbm/City7>.} ";
 		
 		Pattern pattern = Pattern.compile("(<[^>]+>)");
-		Matcher matcher = pattern.matcher(qu);
+		Matcher matcher = pattern.matcher(q);
 		
 		int i=0;
 		String object = "a";
@@ -39,7 +40,6 @@ public class QueryFactory {
 			    System.out.println("Objet : " + matcher.group(1).replaceAll("<*>*", ""));
 			    object = matcher.group(1).replaceAll("<*>*", "");
 			    
-				System.out.println("Ajoute la condition");
 				i = 0;
 				Condition c = new Condition(predicat, object);
 				query.addCondition(c);
@@ -51,29 +51,30 @@ public class QueryFactory {
 		
 		return query;
 	}
-	
-	//Exectute each condition -> pick 
-	public void multipleQuery() {
-		
-	}
-	
-	public void simpleQuery() {
-		
-	}
-	
 
 	//Read into the file and for each Query, executeQuery()
-	public void executeListQuery(String path) throws IOException {
+	public ArrayList<Query> createMultipleQuery(String path) throws IOException {
+		
+		ArrayList<Query> listQuery = new ArrayList<>();
 		
 		File file = new File(path); 
 		  
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
 		  
 		String st; 
+		String sQuery = "";
 		while ((st = br.readLine()) != null) {
-				System.out.println("#" + st); 
+			sQuery += st;
+			if(st.contains("}")) {
+
+				System.out.println("#" + sQuery); 
+				listQuery.add(createSimpleQuery(sQuery));
+				sQuery = "";
+				
+			}
+
 		} 
-		
+		return listQuery;
 	}
 	
 
