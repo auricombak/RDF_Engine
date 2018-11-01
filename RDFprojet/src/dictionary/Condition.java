@@ -25,7 +25,7 @@ public class Condition {
 
 	@Override
 	public String toString() {
-		return "Condition [p=" + p + ", o=" + o + "]";
+		return "[Predicate : " + p + ", Object : " + o + "]";
 	}	
 	
 	

@@ -22,9 +22,9 @@ public class Query {
 
 	@Override
 	public String toString() {
-		String toS = "#";
+		String toS = "";
 		for(Condition c : query) {
-			toS += query.toString();
+			toS += c.toString();
 		}
 		return toS;
 	}

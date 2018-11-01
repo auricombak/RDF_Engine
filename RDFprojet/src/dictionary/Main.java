@@ -14,9 +14,41 @@ public class Main {
 		Dictionary dico = new Dictionary(parcer.getList());
 		Index index = new Index(dico, parcer.getList());
 		QueryFactory factory = new QueryFactory();
+		
+		//Return ArrayList containing ArrayList<Query> for each file
+		factory.loadFromFolder("../RDFprojet/queries");
+		
+		
+		
+		
 		// Query q = query.create("ca");
 		// System.out.println(q.toString());
-		factory.createMultipleQuery("../RDFprojet/query.queryset");
+
+		/*
+		ArrayList<Query> aq = factory.createMultipleQuery("../RDFprojet/queries/Q_4_location_nationality_gender_type.queryset");
+		int i=0;
+		for(Query q : aq) {
+			i++;
+			System.out.println("Query "+i + " : ");
+			System.out.println(q.toString());
+		} */
+		
+		/*
+		int x = 0;
+		for(ArrayList<Query> aq : factory.createMultipleFileQuery("../RDFprojet/queries")) {
+			x++;
+			System.out.println();
+			System.out.println("File "+x + " : ");
+			int i=0;
+			for(Query q : aq) {
+				i++;
+				System.out.println("Query "+i + " : ");
+				System.out.println(q.toString());
+			}
+		}
+		
+		*/
+		
 		// dico.writeDico();
 		// dico.writeBase();
 		// query.executeListQuery("../RDFprojet/")
