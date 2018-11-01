@@ -12,12 +12,14 @@ public class Main {
 		
 		Dictionary dico = new Dictionary(parcer.getList());
 		Index index = new Index(dico, parcer.getList());
-		
+		QueryFactory query = new QueryFactory();
+		Query q = query.create("ca");
+		System.out.println(q.toString());
 		// dico.writeDico();
 		// dico.writeBase();
+		//query.executeListQuery("../RDFprojet/")
+		//System.out.println("Result : " + query(index, dico , "http://db.uwaterloo.ca/~galuc/wsdbm/userId", "9279708" ).toString());
 		
-		System.out.println("Result : " + query(index, dico , "http://db.uwaterloo.ca/~galuc/wsdbm/userId", "9279708" ).toString());
-
 	}
 	
 	public static ArrayList<String> query(Index index, Dictionary dico, String predicate, String object) {
