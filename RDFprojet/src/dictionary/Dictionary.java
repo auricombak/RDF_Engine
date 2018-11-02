@@ -28,11 +28,11 @@ public class Dictionary{
 		
 		// Populate TreeSet who sort and avoid doublons
 		int i=0;
-		while(i<list.nbTriple){
+		while(i<list.getNbTriple()){
 			
-			listEachSPO.add(list.subjects.get(i));
-			listEachSPO.add(list.predicates.get(i));
-			listEachSPO.add(list.objects.get(i));			
+			listEachSPO.add(list.getSubjects().get(i));
+			listEachSPO.add(list.getPredicates().get(i));
+			listEachSPO.add(list.getObjects().get(i));			
 			
 			i++;
 		}

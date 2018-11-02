@@ -13,10 +13,10 @@ import org.openrdf.rio.helpers.RDFHandlerBase;
 
 public class RDFListener extends RDFHandlerBase {
 
-	public ArrayList<String > subjects = new ArrayList<>();
-	public ArrayList<String > predicates = new ArrayList<>();
-	public ArrayList<String > objects = new ArrayList<>();
-	static Integer nbTriple = 0;
+	private ArrayList<String > subjects = new ArrayList<>();
+	private ArrayList<String > predicates = new ArrayList<>();
+	private ArrayList<String > objects = new ArrayList<>();
+	private Integer nbTriple = 0;
 	
 	@Override
 	public void handleStatement(Statement st) {
@@ -51,12 +51,12 @@ public class RDFListener extends RDFHandlerBase {
 		this.objects = objects;
 	}
 
-	public static Integer getNbTriple() {
+	public Integer getNbTriple() {
 		return nbTriple;
 	}
 
-	public static void setNbTriple(Integer nbTriple) {
-		RDFListener.nbTriple = nbTriple;
+	public void setNbTriple(Integer nbTriple) {
+		this.nbTriple = nbTriple;
 	}
 	
 
