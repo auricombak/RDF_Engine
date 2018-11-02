@@ -23,17 +23,27 @@ public class QueryExecutioner {
         Stack<TreeSet<Integer>> toMergeJoin = new Stack<>();
         ArrayList<Condition> mConditions = mQuery.getConditions();
 
-
         for (Condition c : mConditions) {
-            int Ipredicate = mDico.getDico().get(c.getP());
-            int Iobject = mDico.getDico().get(c.getO());
+        	int Ipredicate;
+        	int Iobject;
+        	try {
+        		Ipredicate = mDico.getDico().get(c.getP());
+        		Iobject = mDico.getDico().get(c.getO());
+        	}catch (NullPointerException e) {
+
+        	    return results;
+
+        	}
 
             //Optimisation !!!
-            TreeSet<Integer> Isubject = mIndex.getPos().get(Ipredicate).get(Iobject);
 
-            toMergeJoin.add(Isubject);
+            HashMap <Integer,TreeSet<Integer>> objects = mIndex.getPos().get(Ipredicate);
 
-            //System.out.println(Isubject.toString());
+            //System.out.println(mIndex.getPos().get(Ipredicate).size());
+            if(objects.containsKey(Iobject)) {
+                TreeSet<Integer> Isubject  = objects.get(Iobject);
+                toMergeJoin.add(Isubject);
+            }
 
         }
 
@@ -44,12 +54,13 @@ public class QueryExecutioner {
             TreeSet<Integer> tmp = intersection(res1, res2);
             toMergeJoin.push(tmp);
         }
-        TreeSet<Integer> finalRes = toMergeJoin.pop();
-
-        for(Integer s: finalRes) {
-            results.add(mDico.getBase().get(s));
+        if(!toMergeJoin.isEmpty()) {
+        	TreeSet<Integer> finalRes = toMergeJoin.pop();
+            for(Integer s: finalRes) {
+                results.add(mDico.getBase().get(s));
+            }
         }
-
+        
         return results;
     }
 
