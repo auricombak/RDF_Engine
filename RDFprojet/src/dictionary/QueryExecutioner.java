@@ -32,7 +32,6 @@ public class QueryExecutioner {
         		Ipredicate = mDico.getDico().get(c.getP());
         		Iobject = mDico.getDico().get(c.getO());
         	}catch (NullPointerException e) {
-
         	    return results;
 
         	}
@@ -44,36 +43,44 @@ public class QueryExecutioner {
         	try {
 	        	if(mIndex.getIo().get(Iobject).get() > mIndex.getIp().get(Ipredicate).get()) {
 	                objects = mIndex.getPos().get(Ipredicate);
+	                objects.get(Iobject);
+	                if(objects.get(Iobject) != null) {
+	                	toMergeJoin.add(objects.get(Iobject));
+	                }
+	                
 	        	}else {
 	        		objects = mIndex.getOps().get(Iobject);
+	                objects.get(Ipredicate);
+	                if(objects.get(Ipredicate) != null) {
+	                	toMergeJoin.add(objects.get(Ipredicate));
+	                }
 	        	}
         	}catch(NullPointerException e) {
         		return results;
         	}
 
-            if(objects.containsKey(Iobject)) {
-                TreeSet<Integer> Isubject  = objects.get(Iobject);
-                toMergeJoin.add(Isubject);
-            }
         }
-     
-        toMergeJoin = sortStack(toMergeJoin);
-     
+        
+        //Sort the toMergeJoin
+        if(toMergeJoin.size() >= 3 ) {
+        	toMergeJoin = sortStack(toMergeJoin);
+        }
+
+
+        //Pop tuple of lighter condition, get the intersection and add it to the stack while stack is not empty
+
         while (toMergeJoin.size() > 1) {
 
             TreeSet<Integer> light = toMergeJoin.pop();
             TreeSet<Integer> heavy = toMergeJoin.pop();
-
+            
             TreeSet<Integer> tmp = intersection(light, heavy);
             toMergeJoin.push(tmp);
-            
-            toMergeJoin = sortStack(toMergeJoin);
             
         } 
         
         if(!toMergeJoin.isEmpty()) {
-        	TreeSet<Integer> finalRes = toMergeJoin.pop();
-            for(Integer s: finalRes) {
+            for(Integer s: toMergeJoin.pop()) {
                 results.add(mDico.getBase().get(s));
             }
         }
@@ -84,7 +91,12 @@ public class QueryExecutioner {
     //Return the intersection of two TreeSet
     public static TreeSet<Integer> intersection(TreeSet<Integer> a, TreeSet<Integer> b) {
 
-
+    	if(a.size()>b.size()) {
+    		TreeSet<Integer> tmp = a;
+    		a = b;
+    		b = tmp;
+    	}
+    	
         TreeSet<Integer> results = new TreeSet<>();
 
         for (Integer element : a) {
@@ -96,17 +108,19 @@ public class QueryExecutioner {
         return results;
     }
     
+    //OPTIMISATION
     //Get Stack in entry -> return Sorted Stack by TreeSet.size()
     public static Stack<TreeSet<Integer>> sortStack(Stack<TreeSet<Integer>> input) 
     { 
     	Stack<TreeSet<Integer>> tmpStack = new Stack<>(); 
     	while(!input.isEmpty()) 
     	{ 
-    		int tmp = input.peek().size(); 
+    		int tmp = input.peek().size();
+
     		TreeSet<Integer> tmpT = new TreeSet<>();
     		tmpT = input.pop();
 
-    		while(!tmpStack.isEmpty() && tmpStack.peek().size() > tmp) 
+    		while(!tmpStack.isEmpty() && tmpStack.peek().size() < tmp) 
     		{ 
     			input.push(tmpStack.pop()); 
     		} 
