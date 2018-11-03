@@ -37,9 +37,9 @@ public class QueryExecutioner {
 
         	}
 
-
         	HashMap <Integer,TreeSet<Integer>> objects = new HashMap<>();
    	
+        	//OPTIMISATION
         	//If argument predicate/object is unknown to Index P/Index O the query return []
         	try {
 	        	if(mIndex.getIo().get(Iobject).get() > mIndex.getIp().get(Ipredicate).get()) {
@@ -55,19 +55,16 @@ public class QueryExecutioner {
                 TreeSet<Integer> Isubject  = objects.get(Iobject);
                 toMergeJoin.add(Isubject);
             }
-
         }
-
      
         toMergeJoin = sortStack(toMergeJoin);
      
         while (toMergeJoin.size() > 1) {
 
+            TreeSet<Integer> light = toMergeJoin.pop();
+            TreeSet<Integer> heavy = toMergeJoin.pop();
 
-            TreeSet<Integer> res1 = toMergeJoin.pop();
-            TreeSet<Integer> res2 = toMergeJoin.pop();
-
-            TreeSet<Integer> tmp = intersection(res1, res2);
+            TreeSet<Integer> tmp = intersection(light, heavy);
             toMergeJoin.push(tmp);
             
             toMergeJoin = sortStack(toMergeJoin);
@@ -84,11 +81,9 @@ public class QueryExecutioner {
         return results;
     }
 
+    //Return the intersection of two TreeSet
     public static TreeSet<Integer> intersection(TreeSet<Integer> a, TreeSet<Integer> b) {
-        // unnecessary; just an optimization to iterate over the smaller set
-        if (a.size() > b.size()) {
-            return intersection(b, a);
-        }
+
 
         TreeSet<Integer> results = new TreeSet<>();
 
@@ -101,6 +96,7 @@ public class QueryExecutioner {
         return results;
     }
     
+    //Get Stack in entry -> return Sorted Stack by TreeSet.size()
     public static Stack<TreeSet<Integer>> sortStack(Stack<TreeSet<Integer>> input) 
     { 
     	Stack<TreeSet<Integer>> tmpStack = new Stack<>(); 
@@ -120,5 +116,4 @@ public class QueryExecutioner {
     	return tmpStack; 
 	} 
 
-    //public String getExecTime(){}
 }
