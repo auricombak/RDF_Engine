@@ -3,6 +3,7 @@ package dictionary;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class QueryExecutioner {
@@ -26,6 +27,7 @@ public class QueryExecutioner {
         for (Condition c : mConditions) {
         	int Ipredicate;
         	int Iobject;
+        	//If object or predicate not exist in Dictionary, the query return empty []
         	try {
         		Ipredicate = mDico.getDico().get(c.getP());
         		Iobject = mDico.getDico().get(c.getO());
@@ -35,11 +37,20 @@ public class QueryExecutioner {
 
         	}
 
-            //Optimisation !!!
 
-            HashMap <Integer,TreeSet<Integer>> objects = mIndex.getPos().get(Ipredicate);
+        	HashMap <Integer,TreeSet<Integer>> objects = new HashMap<>();
+   	
+        	//If argument predicate/object is unknown to Index P/Index O the query return []
+        	try {
+	        	if(mIndex.getIo().get(Iobject).get() > mIndex.getIp().get(Ipredicate).get()) {
+	                objects = mIndex.getPos().get(Ipredicate);
+	        	}else {
+	        		objects = mIndex.getOps().get(Iobject);
+	        	}
+        	}catch(NullPointerException e) {
+        		return results;
+        	}
 
-            //System.out.println(mIndex.getPos().get(Ipredicate).size());
             if(objects.containsKey(Iobject)) {
                 TreeSet<Integer> Isubject  = objects.get(Iobject);
                 toMergeJoin.add(Isubject);
@@ -47,13 +58,22 @@ public class QueryExecutioner {
 
         }
 
+     
+        toMergeJoin = sortStack(toMergeJoin);
+     
         while (toMergeJoin.size() > 1) {
+
+
             TreeSet<Integer> res1 = toMergeJoin.pop();
             TreeSet<Integer> res2 = toMergeJoin.pop();
 
             TreeSet<Integer> tmp = intersection(res1, res2);
             toMergeJoin.push(tmp);
-        }
+            
+            toMergeJoin = sortStack(toMergeJoin);
+            
+        } 
+        
         if(!toMergeJoin.isEmpty()) {
         	TreeSet<Integer> finalRes = toMergeJoin.pop();
             for(Integer s: finalRes) {
@@ -80,6 +100,25 @@ public class QueryExecutioner {
 
         return results;
     }
+    
+    public static Stack<TreeSet<Integer>> sortStack(Stack<TreeSet<Integer>> input) 
+    { 
+    	Stack<TreeSet<Integer>> tmpStack = new Stack<>(); 
+    	while(!input.isEmpty()) 
+    	{ 
+    		int tmp = input.peek().size(); 
+    		TreeSet<Integer> tmpT = new TreeSet<>();
+    		tmpT = input.pop();
+
+    		while(!tmpStack.isEmpty() && tmpStack.peek().size() > tmp) 
+    		{ 
+    			input.push(tmpStack.pop()); 
+    		} 
+
+    		tmpStack.push(tmpT); 
+    	} 
+    	return tmpStack; 
+	} 
 
     //public String getExecTime(){}
 }

@@ -33,7 +33,7 @@ public class Dictionary{
 			listEachSPO.add(list.getSubjects().get(i));
 			listEachSPO.add(list.getPredicates().get(i));
 			listEachSPO.add(list.getObjects().get(i));			
-			
+
 			i++;
 		}
 		
