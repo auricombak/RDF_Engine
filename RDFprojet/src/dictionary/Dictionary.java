@@ -12,7 +12,7 @@ import java.util.TreeSet;
 public class Dictionary{
 	
 	//Dictionary with objects, predicates and subject sorted | TreeMap<Key,Value> -> <String,Integer>
-	TreeMap < String, Integer > dico;
+	HashMap < String, Integer > dico;
 	
 	//Base with objects, predicates and subject, for retrieve value in fast access | HashMap<Key,Value> -> <Integer,Value>
 	HashMap<Integer, String> base;
@@ -20,7 +20,7 @@ public class Dictionary{
 	//Constructor
 	public Dictionary(RDFListener list) {
 		
-		dico =  new TreeMap<>();
+		dico =  new HashMap<>();
 		base = new HashMap<>();
 		
 		TreeSet<String> listEachSPO = new TreeSet<>();
@@ -49,12 +49,12 @@ public class Dictionary{
 	}
 
 	//Getter Dico
-	public TreeMap<String, Integer> getDico() {
+	public HashMap<String, Integer> getDico() {
 		return dico;
 	}
 
 	//Setter Dico
-	public void setDico(TreeMap<String, Integer> dico) {
+	public void setDico(HashMap<String, Integer> dico) {
 		this.dico = dico;
 	}
 

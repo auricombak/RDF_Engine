@@ -31,8 +31,7 @@ public final class RDFRawParser {
 	public void parse(String path) throws FileNotFoundException {
 		
 		//Reader reader = new FileReader(path);
-		Reader reader = new FileReader(
-				"../RDFprojet/100K.rdfxml");
+		Reader reader = new FileReader(path);
 
 		org.openrdf.rio.RDFParser rdfParser = Rio
 				.createParser(RDFFormat.RDFXML);
@@ -52,7 +51,6 @@ public final class RDFRawParser {
 			System.out.println("Predicate : ["+list.getPredicates().get(x).toString() + "]");
 			System.out.println("Object : ["+list.getObjects().get(x).toString() + "]");
 			System.out.println("Subject : ["+list.getSubjects().get(x).toString()+ "]");
-
 		}
 	}
 
