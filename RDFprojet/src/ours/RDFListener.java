@@ -1,4 +1,4 @@
-package dictionary;
+package ours;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

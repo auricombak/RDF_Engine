@@ -6,29 +6,29 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/commons-io-2.4.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/sesame-model-2.7.11.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/sesame-queryalgebra-evaluation-2.7.11.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/sesame-rio-api-2.7.11.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/sesame-rio-extensions-api-0.1.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/sesame-rio-rdfxml-2.7.11.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/sesame-util-2.7.11.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/slf4j-api-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/libraries/slf4j-simple-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/commons-codec-1.6.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/httpclient-4.2.3.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/httpcore-4.2.2.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/jcl-over-slf4j-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/jena-arq-2.11.0.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/jena-core-2.11.0.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/jena-iri-1.0.0.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/jena-sdb-1.4.0.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/jena-tdb-1.0.0.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/owlapi-distribution-3.4.10.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/slf4j-api-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/slf4j-log4j12-1.6.4.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/xercesImpl-2.11.0.jar"/>
-	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181023/jena/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/sesame-util-2.7.11.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/sesame-rio-rdfxml-2.7.11.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/sesame-rio-extensions-api-0.1.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/sesame-rio-api-2.7.11.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/sesame-queryalgebra-evaluation-2.7.11.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/sesame-model-2.7.11.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/libraries/slf4j-simple-1.6.4.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/jena-tdb-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/jena-sdb-1.4.0.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/jena-iri-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/jena-core-2.11.0.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/jena-arq-2.11.0.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/jcl-over-slf4j-1.6.4.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="/home/oguerisck/Documents/RDF/Materiel pour le projet-20181118/jena/owlapi-distribution-3.4.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

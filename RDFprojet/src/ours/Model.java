@@ -1,4 +1,4 @@
-package dictionary;
+package ours;
 
 public class Model {
     Index mIndex;

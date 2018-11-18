@@ -1,4 +1,4 @@
-package dictionary;
+package ours;
 
 import java.awt.List;
 import java.io.BufferedReader;
